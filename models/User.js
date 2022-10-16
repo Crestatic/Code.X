@@ -42,6 +42,13 @@ User.init(
         len: [6],
       },
     },
+    project_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'project',
+        key: 'id',
+      }
+    }
   },
   {
     hooks: {
