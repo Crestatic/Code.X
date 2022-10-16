@@ -11,8 +11,9 @@ const sequelize = require('./config/connection');
 const { setEngine } = require('crypto');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
+
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 //set up custom handlebars helpers
 const hbs = exphbs.create({ helpers });
@@ -44,6 +45,34 @@ app.use(express.urlencoded({ extended: true}));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
+
+// // Socket.IO stuff
+// const users = {};
+
+// io.on('connection', (socket) => {
+//     socket.on('new-user', (user) => {
+//         users[socket.id] = user
+//         socket.broadcast.emit('user-connected', user)
+//         socket.emit('current-users', users);
+//         console.log('user joined');
+//     })
+
+//     socket.on('message', (data) => {
+//         io.sockets.emit('new-message', data);
+//     });
+
+//     socket.on('send-users', (values) => {
+//         io.sockets.emit('display-uers', values)
+//     });
+    
+//     socket.on('disconnect', () => {
+//         socket.broadcast.emit('user-disc', users[socket.id]);
+//         delete users[socket.id];
+//         socket.emit('current-users', users);
+//         console.log('user disconnected')
+//     })
+// });
+
 
 // set up connection for db and server
 sequelize.sync({ force: false }).then(() => {
