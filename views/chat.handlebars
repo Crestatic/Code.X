@@ -1,0 +1,33 @@
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-sm-3">
+                <h6>Online Users:</h6>
+                <hr class="line">
+                <ul class="users">
+                    <li id="you">{{userName}}</li>
+                    <li id="otherUsers"></li>
+                </ul>
+            </div>
+            <div class="col-sm-8"> <!-- Chat box -->
+                <div class="chat-container">
+                    <h6>Chat</h6>
+                    <div class="chat-box">
+                        <div class="chat-message">
+                            <p>Greetings {{userName}}. Welcome to Code.X chat!</p>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="input-container">
+                    <form>
+                        <textarea id="message" placeholder="Enter message..."></textarea>
+                    </form>
+                    <button id="sendBtn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/public/js/chat.js"></script>
+
