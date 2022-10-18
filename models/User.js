@@ -41,13 +41,6 @@ User.init(
       validate: {
         len: [6],
       },
-    },
-    project_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'project',
-        key: 'id',
-      }
     }
   },
   {

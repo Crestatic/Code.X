@@ -19,14 +19,6 @@ Project.init(
       type: DataTypes.STRING,
       allowNull: false 
     },
-    language_type: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    interest_type: {
-      type: DataTypes.STRING,
-      allowNull: false 
-    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
