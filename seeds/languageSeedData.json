@@ -1,11 +1,8 @@
 [
   {
-    "language": "HTML/CSS"
+    "language_name": "HTML/CSS"
   },
   {
-    "language": "Javascript"
-  },
-  {
-    "language": "Node.js"
+    "language_name": "Javascript"
   }
 ]

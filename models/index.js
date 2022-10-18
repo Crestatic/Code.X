@@ -2,6 +2,7 @@ const User = require('./User');
 const Project = require('./Project');
 const Language = require('./Language');
 const Interest = require('./Interest');
+const ProjectLanguage = require('./ProjectLanguage');
 
 User.hasMany(Project, {
   foreignKey: 'user_id',
@@ -12,31 +13,14 @@ Project.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-Project.hasMany(User, {
-  foreignKey: 'project_id',
-  onDelete: 'CASCADE'
-});
-
-User.belongsTo(Project, {
-  foreignKey: 'project_id'
-});
-
-Project.hasMany(Language, {
-  foreignKey: 'project_id',
-  onDelete: 'CASCADE'
-});
-
-Language.belongsTo(Project, {
-  foreignKey: 'project_id',
-});
-
-Language.hasMany(Project, {
+Language.belongsToMany(Project, {
+  through: ProjectLanguage,
   foreignKey: 'language_id',
-  onDelete: 'CASCADE'
 });
 
-Project.belongsTo(Language, {
-  foreignKey: 'language_id'
+Project.belongsToMany(Language, {
+  through: ProjectLanguage,
+  foreignKey: 'project_id'
 });
 
 Project.hasOne(Interest, {
@@ -48,5 +32,14 @@ Interest.belongsTo(Project, {
   foreignKey: 'project_id',
 });
 
+Interest.hasOne(Project, {
+  foreignKey: 'interest_id',
+  onDelete: 'CASCADE'
+});
 
-module.exports = { User, Project, Language, Interest };
+Project.belongsTo(Interest, {
+  foreignKey: 'interest_id'
+});
+
+
+module.exports = { User, Project, Language, Interest, ProjectLanguage };

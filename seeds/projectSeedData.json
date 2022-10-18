@@ -1,13 +1,10 @@
 [
   {
     "project_name": "Job Search Board",
-    "description": "Use Javascript, Nodejs, Express to create a job search website.",
-    "language_type": ["HTML/CSS", "Javascript", "Node.js", "Express.js"],
-    "interest_type": "miscellaneous"
+    "description": "Use Javascript, Nodejs, Express to create a job search website."
   },
   {
     "project_name": "",
-    "description": "",
-    "language_type": ""
+    "description": ""
   }
 ]
