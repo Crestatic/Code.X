@@ -37,4 +37,10 @@ router.get('/chat', (req, res) => {
   res.render('chat')
 });
 
+
+// Query the data and send them to handlebars
+router.get('/project', (req, res) => {
+  res.render('project')
+});
+
 module.exports = router;
