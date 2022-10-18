@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
       {
         model: Interest,
         as: "interest",
-        attributes: []
+        attributes: ["interest_name"]
       }
     ],
     });
