@@ -32,13 +32,6 @@ Project.init(
         model: 'language',
         key: 'id',
       }
-    },
-    interest_id: {
-      type: DataTypes.INTEGER,
-      references: {
-        model: 'interest',
-        key: 'id',
-      }
     }
   },
   {
