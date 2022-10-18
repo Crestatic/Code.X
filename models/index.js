@@ -3,6 +3,7 @@ const Project = require('./Project');
 const Language = require('./Language');
 const Interest = require('./Interest');
 const ProjectLanguage = require('./ProjectLanguage');
+const ProjectInterest = require('./ProjectInterest')
 
 User.hasMany(Project, {
   foreignKey: 'user_id',
@@ -29,6 +30,7 @@ Project.hasOne(Interest, {
 });
 
 Interest.belongsTo(Project, {
+  through: ProjectInterest,
   foreignKey: 'project_id',
 });
 
@@ -38,8 +40,9 @@ Interest.hasOne(Project, {
 });
 
 Project.belongsTo(Interest, {
+  through: ProjectInterest,
   foreignKey: 'interest_id'
 });
 
 
-module.exports = { User, Project, Language, Interest, ProjectLanguage };
+module.exports = { User, Project, Language, Interest, ProjectLanguage, ProjectInterest };
