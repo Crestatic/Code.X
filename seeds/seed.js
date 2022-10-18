@@ -5,21 +5,12 @@ const projectSeedData = require('./projectSeedData.json');
 const languageSeedData = require('./languageSeedData.json');
 const interestSeedData = require('./interestSeedData.json');
 
+const seedDatabase = async () => {
+  await sequelize.sync({ force: true });
 
+  const projects = await Project.bulkCreate(projectSeedData);
+  const languages = await Language.bulkCreate(languageSeedData);
+  const interests = await Interest.bulkCreate(interestSeedData);
+}
 
-
-
-
-
-
-// create model and seeds for questionaire 
-
-// question: id
-// select interest
-// select language
-
-// list of objects 
-
-// use handlebars to render questions to page 
-
-// dummy projects to check
+seedDatabase();

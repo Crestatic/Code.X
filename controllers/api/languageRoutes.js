@@ -1,11 +1,15 @@
 const router = require('express').Router();
-const { Project, Language, Interest } = require('../../models');
+const { Project, Language } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
-    const languageData = await Language.findAll();
+    const languageData = await Language.findAll({
+      include: [{ model: Project }]
+    });
     res.status(200).json(languageData);
   } catch (err) {
-    res.status(400).json(err);
+    res.status(500).json(err);
   }
 });
+
+module.exports = router;
