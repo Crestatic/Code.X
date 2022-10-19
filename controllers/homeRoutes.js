@@ -2,13 +2,15 @@ const router = require('express').Router();
 const { Project, User } = require('../models');
 const withAuth = require('../utils/auth');
 
+// console.log("req.session.logged_in");
 router.get('/', (req, res) => {
-  if (req.session.logged_in) {
-    res.redirect('/profile');
-    return;
-  }
+  
+  // if (req.session.logged_in) {
+  //   res.redirect('/profile');
+  //   return;
+  // }
 
-  res.render('login');
+  res.render('profile');
 });
   
 // Use withAuth middleware to prevent access to route
