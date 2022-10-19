@@ -1,24 +1,50 @@
+const chatInput = document.getElementById('chatInput');
+
 const socket = io();
 
-var user = {};
-
-socket.on('user-connected', (users) => {
-    $(".chat-box").append('<div class="chat-message"><p>' + users.user + ' has joined chat.</p>')
+socket.on('message', message => {
+    console.log(message);
+    // outputMessage(message);
+    $(".chat-box").append(`<div class="chat-message">
+        <p class="chatInfo">${message.username} @ <span>${message.time}:</span></p>
+        <p class="chatMsg">${message.text}</p></div>`)
+    
+    //Need to find a way to include autoscroll function for chatbox.
 });
 
-socket.on('user-disc', (users) => {
-    $(".chat-box").append('<div class="chat-message><p>' + users.user + ' has joined.</p>')
+// Chat input
+chatInput.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const msg = e.target.elements.msg.value;
+
+    socket.emit('chatMsg', msg)
+
+    e.target.elements.msg.value = '';
+    e.target.elements.msg.focus();
 });
 
-socket.on('new-message', (data) => {
-    $(".chat-box").append('<div class="chat-message><p>' + data.user + ': ' + data.message +'</p>')
-});
+// function outputMessage(message)
 
-socket.on('online-users', (users) => {
-    const values = Object.values(users)
-    socket.emit('send-users', value);
-});
+// var user = {};
 
-socket.on('display-users', (values) => {
+// socket.on('user-connected', (users) => {
+//     $(".chat-box").append('<div class="chat-message"><p>' + users.user + ' has joined chat.</p>')
+// });
 
-})
+// socket.on('user-disc', (users) => {
+//     $(".chat-box").append('<div class="chat-message><p>' + users.user + ' has joined.</p>')
+// });
+
+// socket.on('new-message', (data) => {
+//     $(".chat-box").append('<div class="chat-message><p>' + data.user + ': ' + data.message +'</p>')
+// });
+
+// socket.on('online-users', (users) => {
+//     const values = Object.values(users)
+//     socket.emit('send-users', value);
+// });
+
+// socket.on('display-users', (values) => {
+
+// })
