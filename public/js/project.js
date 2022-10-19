@@ -39,9 +39,11 @@ const generateLanguageBox = (name, id = null) => {
   const inputBox = document.createElement("input");
     inputBox.setAttribute("type", "checkbox")
     inputBox.setAttribute("data-projectId", id)
+    inputBox.className = "checkboxes"
 
   const inputLabel = document.createElement("label");
     inputLabel.innerText = name;
+    inputLabel.className = "labels"
 
   return [inputBox, inputLabel];
 }
@@ -66,14 +68,36 @@ const renderLanguages = (languages) => {
   } 
 }
 
-const checkedLanguages = async (language) => {
-  const checkbox = document.querySelector('input');
-  console.log("example", language);
-  if (checkbox.checked &&  checkbox.checked == language?.projects.project_name) {
-    console.log(language?.projects.project_name)
-  }
+ 
 
+const checkedLanguages = async (language) => {
+  
+  const checkbox = document.querySelectorAll('.checkboxes');
+  const label = document.querySelectorAll('.labels')
+  console.log(checkbox)
+  console.log(label)
+
+  for (var i = 0; i < checkbox.length; i++) {
+    checkbox[i].addEventListener('change', event => {
+      if (event.target.checked && language[0].language_name === label[0].innerHTML) {
+        console.log(language)
+        console.log(language[0].projects[0].project_name)
+
+        var projectContain = document.getElementById('projectContainer')
+        var projectEl = document.createElement('h1');
+        var projectInnerHTML = 
+        `${language[0].projects[0].project_name}`
+
+        projectEl.innerText = projectInnerHTML;
+        projectContain.appendChild(projectEl);
+      } else {
+        console.log('ERROR')
+      }
+    })
+  }  
 }
+
+checkedLanguages();
 
 var confirmBtn = document.getElementById('#confirm-btn')
 
