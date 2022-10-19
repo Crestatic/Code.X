@@ -1,16 +1,40 @@
+// Fetch language database
+const getlanguages = async () => {
+  try {
+
+    const data = await $.ajax("/api/languages");
+
+    renderLanguages(data);
+    checkedLanguages(data);
+
+    console.log("Data: ", data);
+    
+  } catch (error) {
+    console.log("Error: ", error);
+  }
+}
+
+getlanguages(); 
+
+// Fetch projects database
+const getProjects = async () => {
+  try {
+
+    const data = await $.ajax("/api/projects");
+
+    // renderProjects(data);
+
+    console.log("Projects Data: ", data);
+    
+  } catch (error) {
+    console.log("Error: ", error);
+  }
+}
+getProjects();
+
 const languagesBoxes = document.querySelector("#language-boxes");
 
-/*
-  Remaining
-  TODO: When checking the checkobox, figure out
-  how to get the project
-
-  TODO: invoke the getSingleProject(:id) with the id of the project
-
-  TODO: The display them in the page
-
-*/
-
+// Create inputs and labels for languages
 const generateLanguageBox = (name, id = null) => {
   const inputBox = document.createElement("input");
     inputBox.setAttribute("type", "checkbox")
@@ -19,30 +43,46 @@ const generateLanguageBox = (name, id = null) => {
   const inputLabel = document.createElement("label");
     inputLabel.innerText = name;
 
-  // return [inputBox, inputLabel];
   return [inputBox, inputLabel];
 }
 
-console.log("Yes testing and");
+// Render the language names onto page
+const renderLanguages = (languages) => {
 
-// Harder option
-// Ajax Request to get the data from the server
-// DOM Manipulation to display the data in the pageindex
-
-
-const getProjects = async () => {
-  try {
-
-    const data = await $.ajax("/api/projects");
-
-    renderProjects(data);
-
-    console.log("Data: ", data);
-    
-  } catch (error) {
-    console.log("Error: ", error);
+  if (!languages?.length) {
+    return null;
   }
+
+  for (let i = 0; i < languages?.length; i++) {
+    const language = languages[i];
+
+    console.log("Language: ", language);
+    const languageName = language?.language_name;
+    const projectId = language?.project_id;
+    const [input, label] = generateLanguageBox(languageName, projectId); // input, label
+
+    languagesBoxes.appendChild(input)
+    languagesBoxes.appendChild(label)
+  } 
 }
+
+const checkedLanguages = async (language) => {
+  const checkbox = document.querySelector('input');
+  console.log("example", language);
+  if (checkbox.checked &&  checkbox.checked == language?.projects.project_name) {
+    console.log(language?.projects.project_name)
+  }
+
+}
+
+var confirmBtn = document.getElementById('#confirm-btn')
+
+// confirmBtn.addEventListener('click', checkedLanguages);
+
+
+
+
+
 
 const getSingleProject = async (id) => {
   try {
@@ -65,7 +105,9 @@ const getSingleProject = async (id) => {
       }
     */
     // TODO: The above is an example of the response
-    const data = await $.ajax("/api/projects/" + id);
+    const data = await $.ajax("/api/projects/");
+
+
 
     // Get the data of that single project by id
     // Display in the page
@@ -78,56 +120,31 @@ const getSingleProject = async (id) => {
   }
 }
 
-const getlanguages = async () => {
-  try {
+// const renderProjects = (projects) => {
 
-    const data = await $.ajax("/api/languages");
+//   if (!projects?.length) {
+//     return null;
+//   }
 
-    renderLanguages(data);
+//   for (let i = 0; i < projects?.length; i++) {
+//     const project = projects[i];
+//     const projectName = project?.project_name;
+//     const [input, label] = generateLanguageBox(projectName); // input, label
 
-    console.log("Data: ", data);
-    
-  } catch (error) {
-    console.log("Error: ", error);
-  }
-}
-
-const renderProjects = (projects) => {
-
-  if (!projects?.length) {
-    return null;
-  }
-
-  for (let i = 0; i < projects?.length; i++) {
-    const project = projects[i];
-    const projectName = project?.project_name;
-    const [input, label] = generateLanguageBox(projectName); // input, label
-
-    languagesBoxes.appendChild(input)
-    languagesBoxes.appendChild(label)
-  }
+//     languagesBoxes.appendChild(input)
+//     languagesBoxes.appendChild(label)
+//   }
   
-}
-
-getlanguages(); 
+// }
 
 
-const renderLanguages = (languages) => {
+/*
+  Remaining
+  TODO: When checking the checkobox, figure out
+  how to get the project
 
-  if (!languages?.length) {
-    return null;
-  }
+  TODO: invoke the getSingleProject(:id) with the id of the project
 
-  for (let i = 0; i < languages?.length; i++) {
-    const language = languages[i];
+  TODO: The display them in the page
 
-    console.log("Language: ", language);
-    const languageName = language?.language_name;
-    const projectId = language?.project_id;
-    const [input, label] = generateLanguageBox(languageName, projectId); // input, label
-
-    languagesBoxes.appendChild(input)
-    languagesBoxes.appendChild(label)
-  }
-  
-}
+*/

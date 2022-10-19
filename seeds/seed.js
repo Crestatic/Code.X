@@ -8,10 +8,14 @@ const projectLanguageSeedData = require('./projectLanguageSeedData.json');
 const seedDatabase = async () => {
   await sequelize.sync({ force: true });
 
-  const projects = await Project.bulkCreate(projectSeedData);
-  
-  
-  // TODO: This includes the project id when generating the languages
+  await Project.bulkCreate(projectSeedData);
+  await Language.bulkCreate(languageSeedData);
+  await ProjectLanguage.bulkCreate(projectLanguageSeedData);
+}
+
+seedDatabase();
+
+ // TODO: This includes the project id when generating the languages
   // let formatLanguages = [];
   // for (let i = 0; i < languageSeedData?.length; i++) {
   //   const currentLanguage = languageSeedData[i];
@@ -30,8 +34,3 @@ const seedDatabase = async () => {
   // const languages = await Language.bulkCreate(formatLanguages);
 
   // TODO: Comment this one out and use the above
-  const languages = await Language.bulkCreate(languageSeedData);
-  const projectlanguage = await ProjectLanguage.bulkCreate(projectLanguageSeedData);
-}
-
-seedDatabase();
