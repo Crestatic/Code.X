@@ -1,9 +1,9 @@
-<div class="container" id="language-boxes">
+{{!-- <div class="container" id="language-boxes"> --}}
   {{!-- <input type="checkbox">
   <label id="language_1">{{language_1}}</label>
   <input type="checkbox">
   <label id="language_1">{{language_1}}</label> --}}
-</div>
+{{!-- </div>
 <div>
   <button type="button" id="confirm-btn">Confirm</button>
 </div>
@@ -13,4 +13,32 @@
 </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/js/project.js"></script>
+<script src="/js/project.js"></script> --}}
+
+    <div class="container">
+        <div id="main" class="row">
+            <div id="mainArea" class="col-sm-12 border border-dark">
+                <div>
+                  
+                </div>
+                <h5>Select a Language/Technology:</h5>
+                <select name="language" id="language">
+							      <option value="HTML/CSS">HTML/CSS</option>
+							      <option value="Javascript">Javascript</option>
+							      <option value="API">API</option>
+							      <option value="Node.js">Node.js</option>
+							      <option value="React">React</option>
+						    </select>
+                <button type="submit" class="btn">Find Project</button>
+                <div class="project-container">
+                    <div class="project-box">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{!-- <script src="/js/project.js"></script> --}}
+    <script src="/js/generator.js"></script>
+    

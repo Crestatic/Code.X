@@ -17,13 +17,7 @@ const PORT = process.env.PORT || 3002;
 // Set up socket.io
 
 const http = require('http').Server(app);
-const io = require('socket.io')(http, {
-    cors: {
-        origin: "http://localhost:3001",
-        methods: "GET,POST",
-        credentials: "true"
-    }
-});
+const io = require('socket.io')(http)
 
 
 //set up custom handlebars helpers
