@@ -40,4 +40,8 @@ router.get('/chat', (req, res) => {
   res.render('chat')
 });
 
+router.get('/project', (req, res) => {
+  res.render('project')
+});
+
 module.exports = router;

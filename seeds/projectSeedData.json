@@ -4,7 +4,15 @@
     "description": "Use Javascript, Nodejs, Express to create a job search website."
   },
   {
-    "project_name": "",
+    "project_name": "Blank Project",
+    "description": ""
+  },
+  {
+    "project_name": "Project 3",
+    "description": ""
+  },
+  {
+    "project_name": "Example Project 4",
     "description": ""
   }
 ]

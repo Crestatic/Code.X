@@ -8,7 +8,7 @@ router.get('/', async (req, res) => {
         { 
         model: Language,
         as: "languages",
-        attributes: ["language_name"],
+        attributes: ["language_name", "id"],
         through: {
           attributes: [],
         }
