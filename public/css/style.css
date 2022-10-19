@@ -71,3 +71,27 @@ main {
     position: relative;
     bottom: 5px;
 }
+
+/* Project CSS */
+#language-boxes {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+.checkboxes {
+    margin: 10px;
+}
+.labels {
+    margin: 10px
+}
+#btn-container {
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+}
+#projectContainer {
+    margin: 20px;
+}
+h3 {
+    text-align: center;
+}
