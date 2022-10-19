@@ -15,8 +15,16 @@ const app = express();
 const PORT = process.env.PORT || 3002;
 
 // Set up socket.io
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+
+const http = require('http').Server(app);
+const io = require('socket.io')(http, {
+    cors: {
+        origin: "http://localhost:3001",
+        methods: "GET,POST",
+        credentials: "true"
+    }
+});
+
 
 //set up custom handlebars helpers
 const hbs = exphbs.create({ helpers });
@@ -27,6 +35,7 @@ const sess = {
     cookie: {
         maxAge: 300000,
         httpOnly: true,
+        secure: false,
         sameSite: 'none',
     },
     resave: false,

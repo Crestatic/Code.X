@@ -1,3 +1,8 @@
 [
-    
+    {
+        "name": "Joe",
+        "email": "joe@joe.com",
+        "github": "github.com/joe",
+        "password": "password12345"
+    }
 ]

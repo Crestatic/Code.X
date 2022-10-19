@@ -1,31 +1,16 @@
 <div class="row">
   <div class="col-auto">
     <h2>Welcome, {{name}}!</h2>
+    <ul>
+      <li>Email: {{email}}</li>
+      <li>Github: {{github}}</li>
+    </ul>
   </div>
 </div>
 
 <div class="row mt-4">
   <div class="col-md-6">
-    <h3>Create a New Project:</h3>
-
-    <form class="form new-project-form">
-      <div class="form-group">
-        <label for="project-name">project name:</label>
-        <input class="form-input" type="text" id="project-name" name="project-name" />
-      </div>
-      <div class="form-group">
-        <label for="project-funding">needed funding ($):</label>
-        <input class="form-input" type="number" id="project-funding" name="project-funding" />
-      </div>
-      <div class="form-group">
-        <label for="project-desc">description:</label>
-        <textarea class="form-input" id="project-desc" name="project-desc"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Create</button>
-      </div>
-    </form>
-  </div>
+    <h3>Saved Projects:</h3>
 
   {{#if projects.length}}
   <div class="col-md-6 project-list">
@@ -45,4 +30,4 @@
   {{/if}}
 </div>
 
-<script src="./js/profile.js"></script>
+{{!-- <script src="./js/profile.js"></script> --}}
