@@ -38,8 +38,15 @@ main {
     padding-top: 50px;
 }
 
-#sideBar {
+#sideBar, #user-info, #saved-projects {
     background-color: rgb(149, 158, 235);
+    border-radius: 20px;
+    margin-right: 20px;
+    padding: 10px;
+}
+
+#login-fields, #signup-fields {
+    background-color: aquamarine;
     border-radius: 20px;
     margin-right: 20px;
     padding: 10px;
