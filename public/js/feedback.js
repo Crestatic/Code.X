@@ -6,13 +6,17 @@ const newFormHandler = async (event) => {
 
   console.log(email, feedback);
     if (email && feedback) {
-        await fetch(`/feedback`, {
+        const response = await fetch(`/api/feedback`, {
         method: 'POST',
         body: JSON.stringify({ email, feedback }),
         headers: {
           'Content-Type': 'application/json',
         },
       });
+
+      if (response.ok) {
+        alert('Feedback posted!');
+      }
     }
   };
 
