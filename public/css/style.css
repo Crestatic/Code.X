@@ -82,18 +82,36 @@ main {
     flex-direction: column;
 }
 label {
-    margin-right: 2rem;
+    margin: 8px;
+}
+
+.labelText {
+    font-size: 20px;
+    margin: 2px;
+}
+
+.inputContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+input {
+    margin: 3px;
 }
   
 table {
+    width: 100%;
     margin-top: 1em;
     border-collapse: collapse;
 }
 table td {
-    padding: 0.2rem;
+    padding: 10px 20px;
     border: 1px solid lightgray;
 }
 table th {
     background-color: steelblue;
     color: white;
+}
+#filt {
+    text-align: center;
 }

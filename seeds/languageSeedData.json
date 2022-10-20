@@ -1,14 +1,35 @@
 [
   {
-    "language_name": "HTML/CSS"
+    "language_name": "HTML/CSS" 
   },
   {
-    "language_name": "Javascript"
+    "language_name": "Javascript" 
   },
   {
-    "language_name": "Express"
+    "language_name": "TypeScript" 
   },
   {
-    "language_name": "React"
+    "language_name": "React" 
+  }, 
+  {
+    "language_name": "Python" 
+  },
+  {
+    "language_name": "Flask" 
+  },
+  {
+    "language_name": "C#" 
+  },
+  {
+    "language_name": "Docker" 
+  },
+  {
+    "language_name": "NodeJS" 
+  },
+  {
+    "language_name": "SQL" 
+  },
+  {
+    "language_name": "NoSQL" 
   }
 ]
