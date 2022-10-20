@@ -8,6 +8,10 @@ body {
     font-weight: 600;
 }
 
+.row {
+    justify-content: center;
+}
+
 .nav-link{
     color: white;
 }
@@ -69,7 +73,10 @@ main {
     padding: 30px;
 	max-height: 500px;
 	overflow-y: scroll;
-    
+}
+
+.users {
+    font-size: 20px;
 }
 
 #chatInput {
