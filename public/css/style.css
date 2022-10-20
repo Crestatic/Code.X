@@ -71,3 +71,29 @@ main {
     position: relative;
     bottom: 5px;
 }
+
+/* Project CSS */
+.hide {
+    display: none;
+}
+#projectContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+label {
+    margin-right: 2rem;
+}
+  
+table {
+    margin-top: 1em;
+    border-collapse: collapse;
+}
+table td {
+    padding: 0.2rem;
+    border: 1px solid lightgray;
+}
+table th {
+    background-color: steelblue;
+    color: white;
+}

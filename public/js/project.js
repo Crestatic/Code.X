@@ -68,8 +68,6 @@ const renderLanguages = (languages) => {
   } 
 }
 
- 
-
 const checkedLanguages = async (language) => {
   
   const checkbox = document.querySelectorAll('.checkboxes');
@@ -77,31 +75,34 @@ const checkedLanguages = async (language) => {
   console.log(checkbox)
   console.log(label)
 
+  // function whenChecked(){
   for (var i = 0; i < checkbox.length; i++) {
     checkbox[i].addEventListener('change', event => {
-      if (event.target.checked && language[0].language_name === label[0].innerHTML) {
-        console.log(language)
-        console.log(language[0].projects[0].project_name)
-
+      if (event.target.checked) {
+        
+        for (var i = 0; i < language.length; i++) {
         var projectContain = document.getElementById('projectContainer')
-        var projectEl = document.createElement('h1');
+        var projectEl = document.createElement('h3');
         var projectInnerHTML = 
-        `${language[0].projects[0].project_name}`
+        `${language[i].projects[i].project_name}`
 
         projectEl.innerText = projectInnerHTML;
         projectContain.appendChild(projectEl);
+        }
       } else {
         console.log('ERROR')
       }
     })
-  }  
-}
+  }} 
+  // var confirmBtn = document.getElementById('#confirm-btn');
+  // confirmBtn.addEventListener('click', whenChecked, false);
+
+// }
 
 checkedLanguages();
 
-var confirmBtn = document.getElementById('#confirm-btn')
 
-// confirmBtn.addEventListener('click', checkedLanguages);
+
 
 
 
