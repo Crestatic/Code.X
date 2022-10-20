@@ -5,17 +5,26 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
+const formatMessage = require('./utils/message')
 
 // Import sequelize connection and store
 const sequelize = require('./config/connection');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 
 // Set up socket.io
+
 const http = require('http').Server(app);
-const io = require('socket.io')(http);
+const io = require('socket.io')(http, {
+    cors: {
+        origin: "localhost:3002",
+        methods: "GET,POST",
+        credentials: "false"
+    }
+});
+
 
 //set up custom handlebars helpers
 const hbs = exphbs.create({ helpers });
@@ -26,7 +35,8 @@ const sess = {
     cookie: {
         maxAge: 300000,
         httpOnly: true,
-        sameSite: 'none',
+        secure: false,
+        sameSite: 'lax',
     },
     resave: false,
     saveUninitialized: true,
@@ -48,14 +58,28 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-// Socket.IO stuff
-const users = {};
-
 io.on('connection', (socket) => {
     console.log('user connected');
+    // socket.emit sends message to the user connecting
+    socket.emit('message', formatMessage('Code.X Chat', 'Welcome to Code.X Chat!'));
+    // socket.broadcast.emit sends message to everyone but user
+    socket.broadcast.emit('message', formatMessage('Code.X Chat', 'A user has joined the chat!'));
+
+    // Runs when a user disconnects
+    socket.on('disconnect', () => {
+        // io.emit sends message to everyone
+        io.emit('message', formatMessage('Code.X Chat', 'A user has left the chat!'))
+    });
+
+    // grats the input from user and emit to io server
+    socket.on('chatMsg', (msg) => {
+        io.emit('message', formatMessage('UserName', msg))
+    });
 });
+
+
 
 // set up connection for db and server
 sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () => console.log(`Now listening to port ${PORT}!`));
+    http.listen(PORT, () => console.log(`Now listening to port ${PORT}!`));
 });

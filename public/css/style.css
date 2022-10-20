@@ -1,0 +1,117 @@
+body {
+    background-color: rgb(170, 167, 167);
+}
+
+.header {
+    background-color: purple;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.nav-link{
+    color: white;
+}
+
+#logout {
+    background-color: rgb(38, 38, 150);
+    color: white;
+    border-radius: 5px;
+    font-weight: 600;
+}
+
+#logout:hover {
+    transition: transform 150ms;
+    transform: scale(1.05);
+}
+
+#logout:active {
+    transition: transform 150ms;
+    transform: scale(1.0);
+    background-color: rgb(9, 9, 243);
+}
+
+.title {
+    font-size: 50px;
+}
+
+main {
+    padding-top: 50px;
+}
+
+#sideBar {
+    background-color: rgb(149, 158, 235);
+    border-radius: 20px;
+    margin-right: 20px;
+    padding: 10px;
+}
+
+#mainArea {
+    background-color: rgb(149, 158, 235);
+    border-radius: 20px;
+    height: 500px;
+}
+
+.chat-container {
+    align-items: flex-start;
+    margin-top: 25px;
+}
+
+.chat-box {
+    background-color: white;
+    height: 400px;
+    padding: 30px;
+	max-height: 500px;
+	overflow-y: scroll;
+    
+}
+
+#chatInput {
+    margin-top: 20px;
+}
+
+#msg {
+    width: 90%;
+}
+
+.chat-message {
+    background-color: aquamarine;
+    font-size: 20px;
+    line-height: 0.8;
+    margin: 5px;
+}
+
+.chatInfo {
+    font-weight: 600;
+}
+
+.chatMsg {
+    font-size: 18px;
+    position: relative;
+    bottom: 5px;
+}
+
+/* Project CSS */
+.hide {
+    display: none;
+}
+#projectContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+label {
+    margin-right: 2rem;
+}
+  
+table {
+    margin-top: 1em;
+    border-collapse: collapse;
+}
+table td {
+    padding: 0.2rem;
+    border: 1px solid lightgray;
+}
+table th {
+    background-color: steelblue;
+    color: white;
+}
