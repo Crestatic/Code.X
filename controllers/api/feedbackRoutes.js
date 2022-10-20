@@ -1,10 +1,9 @@
 const router = require('express').Router();
-const feedback = require('../../models')
+const { Feedback } = require('../../models')
 
 router.post('/', async (req, res) => {
-    console.log(req.body)
     try {
-      const feedbackData = await feedback.create(req.body);
+      const feedbackData = await Feedback.create(req.body);
       
       req.session.save(() => {
         req.session.feedback_id = feedbackData.id;
