@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Project, Language, Interest } = require('../../models');
+const { Project, Language } = require('../../models');
 
 router.get('/', async (req, res) => {
   try {
@@ -8,15 +8,10 @@ router.get('/', async (req, res) => {
         { 
         model: Language,
         as: "languages",
-        attributes: ["language_name"],
+        attributes: ["language_name", "id"],
         through: {
           attributes: [],
         }
-      }, 
-      {
-        model: Interest,
-        as: "interest",
-        attributes: ["interest_name"]
       }
     ],
     });
@@ -29,7 +24,7 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   try {
     const projectData = await Project.findByPk(req.params.id, {
-      include: [{ model: Language, Interest }],
+      include: [{ model: Language }],
     });
     res.status(200).json(projectData);
   } catch (err) {

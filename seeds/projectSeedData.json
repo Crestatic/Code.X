@@ -1,15 +1,59 @@
 [
   {
-    "project_name": "Job Search Board",
-    "description": "Use Javascript, Nodejs, Express to create a job search website."
+    "project_name": "Vector Hosting Platform",
+    "description": ""
   },
   {
+<<<<<<< HEAD
     "project_name": "",
 <<<<<<< HEAD
     "description": "",
     "language_type": "",
     "interest_type": ""
 =======
+=======
+    "project_name": "Technical Stack Recommendation Tool",
+    "description": ""
+  },
+  {
+    "project_name": "Branding Generator Platform",
+    "description": ""
+  },
+  {
+    "project_name": "Developer Environment Generator",
+    "description": ""
+  },
+  {
+    "project_name": "Developer Setup Recommendation Website",
+    "description": ""
+  },
+  {
+    "project_name": "Abandoned Developer Project Finder",
+    "description": ""
+  },
+  {
+    "project_name": "Product Management Platform",
+    "description": ""
+  },
+  {
+    "project_name": "Mock Interview Platform",
+    "description": ""
+  },
+  {
+    "project_name": "Random API Generator",
+    "description": ""
+  },
+  {
+    "project_name": "Cloud Hosting Platform",
+    "description": ""
+  },
+  {
+    "project_name": "Timelapse Portrait App",
+    "description": ""
+  },
+  {
+    "project_name": "Computer Game",
+>>>>>>> d8ece0103228d1711b5fc385682bcd7fdbd7b0b3
     "description": ""
 >>>>>>> 50980394ba2666f2315703db81fc635ef5973080
   }
