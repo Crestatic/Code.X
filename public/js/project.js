@@ -1,175 +1,72 @@
-// Fetch language database
-const getlanguages = async () => {
-  try {
+const filt=document.getElementById("filt"),
+      list=document.querySelector("#list tbody");
+let cols={}, trs; 
 
-    const data = await $.ajax("/api/languages");
+const table = document.querySelector('table');
+table.classList.add('hide');
+const tableHead = document.querySelector('thead');
+const listTable = document.getElementById('#list');
 
-    renderLanguages(data);
-    checkedLanguages(data);
 
-    console.log("Data: ", data);
+$.ajax({
+  url: "/api/languages",
+  method: "GET",
+  dataType: 'json',
+  data: 'projects',
+  success: 
+  function twoFunction (data) {
+    function showFilter(data) {
+      if (!data.length) return;
+
+      Object.keys(data[0]).forEach((c, i) => cols[c] = i);
+      const menu = {
+        language_name: {}
+      };
     
-  } catch (error) {
-    console.log("Error: ", error);
-  }
-}
-
-getlanguages(); 
-
-// Fetch projects database
-const getProjects = async () => {
-  try {
-
-    const data = await $.ajax("/api/projects");
-
-    // renderProjects(data);
-
-    console.log("Projects Data: ", data);
+      data.forEach(f => Object.entries(menu).forEach(([k, o]) => o[f[k]] = 1));
+      filt.innerHTML = Object.entries(menu).map(([k, o]) => '<h3>Languages</h3>' +
+        Object.keys(o).map(c =>
+          '<label><div class="inputContainer"><input type="checkbox" value="' + c + '" name="' + k + '"><p class="labelText">' + c + '</p></div></label>').join(''));
     
-  } catch (error) {
-    console.log("Error: ", error);
-  }
-}
-getProjects();
-
-const languagesBoxes = document.querySelector("#language-boxes");
-
-// Create inputs and labels for languages
-const generateLanguageBox = (name, id = null) => {
-  const inputBox = document.createElement("input");
-    inputBox.setAttribute("type", "checkbox")
-    inputBox.setAttribute("data-projectId", id)
-    inputBox.className = "checkboxes"
-
-  const inputLabel = document.createElement("label");
-    inputLabel.innerText = name;
-    inputLabel.className = "labels"
-
-  return [inputBox, inputLabel];
-}
-
-// Render the language names onto page
-const renderLanguages = (languages) => {
-
-  if (!languages?.length) {
-    return null;
-  }
-
-  for (let i = 0; i < languages?.length; i++) {
-    const language = languages[i];
-
-    console.log("Language: ", language);
-    const languageName = language?.language_name;
-    const projectId = language?.project_id;
-    const [input, label] = generateLanguageBox(languageName, projectId); // input, label
-
-    languagesBoxes.appendChild(input)
-    languagesBoxes.appendChild(label)
-  } 
-}
-
-const checkedLanguages = async (language) => {
+      showProjects(data);
   
-  const checkbox = document.querySelectorAll('.checkboxes');
-  const label = document.querySelectorAll('.labels')
-  console.log(checkbox)
-  console.log(label)
-
-  // function whenChecked(){
-  for (var i = 0; i < checkbox.length; i++) {
-    checkbox[i].addEventListener('change', event => {
-      if (event.target.checked) {
-        
-        for (var i = 0; i < language.length; i++) {
-        var projectContain = document.getElementById('projectContainer')
-        var projectEl = document.createElement('h3');
-        var projectInnerHTML = 
-        `${language[i].projects[i].project_name}`
-
-        projectEl.innerText = projectInnerHTML;
-        projectContain.appendChild(projectEl);
-        }
-      } else {
-        console.log('ERROR')
-      }
-    })
-  }} 
-  // var confirmBtn = document.getElementById('#confirm-btn');
-  // confirmBtn.addEventListener('click', whenChecked, false);
-
-// }
-
-checkedLanguages();
-
-
-
-
-
-
-
-
-
-const getSingleProject = async (id) => {
-  try {
-
-    /*
-      {
-        "id": 1,
-        "project_name": "Job Search Board",
-        "description": "Use Javascript, Nodejs, Express to create a job search website.",
-        "user_id": null,
-        "language_id": null,
-        "languages": [
-          {
-            "language_name": "HTML/CSS"
-          },
-          {
-            "language_name": "Javascript"
-          }
-        ]
-      }
-    */
-    // TODO: The above is an example of the response
-    const data = await $.ajax("/api/projects/");
-
-
-
-    // Get the data of that single project by id
-    // Display in the page
-
-
-    console.log("Data: ", data);
-    
-  } catch (error) {
-    console.log("Error: ", error);
   }
+  function showProjects(data) {
+    console.log('this is data:', data);
+    console.log('this is object',Object)
+    let projects = data.reduce((a,b) => a.concat(b.projects), [])
+    
+    // sort the array by project id 
+    .sort((a,b) => a.id - b.id)
+    
+    // remove duplicates projects by comparing current and previous id
+    .filter((item, index, array) => !index || item.id !== array[index-1].id);
+
+    // update table
+    list.innerHTML = projects.length > 0 
+      ? projects.map(item => `<tr><td>${item.project_name}</td></tr>`).join("\n")
+      : `<tr><td colspan="10">No matching projects found</td</tr>`;
+      
+  trs = [...list.children];
 }
 
-// const renderProjects = (projects) => {
+filt.addEventListener("change", ev => {
+  let keywords = [...filt.querySelectorAll("input[type=checkbox]:checked")].map(p => p.value).join(",")
 
-//   if (!projects?.length) {
-//     return null;
-//   }
+  let subset = data.filter(item => keywords.includes(item.language_name));
 
-//   for (let i = 0; i < projects?.length; i++) {
-//     const project = projects[i];
-//     const projectName = project?.project_name;
-//     const [input, label] = generateLanguageBox(projectName); // input, label
-
-//     languagesBoxes.appendChild(input)
-//     languagesBoxes.appendChild(label)
-//   }
+  showProjects(subset);
+  table.classList.remove('hide');
+  tableHead.classList.remove('hide');
+  listTable.classList.remove('hide');
+});
+  showFilter(data);
+}, 
   
-// }
+  error: function() {
+    console.log(data);
+  }
+});
 
 
-/*
-  Remaining
-  TODO: When checking the checkobox, figure out
-  how to get the project
 
-  TODO: invoke the getSingleProject(:id) with the id of the project
-
-  TODO: The display them in the page
-
-*/
