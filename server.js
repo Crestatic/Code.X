@@ -5,7 +5,8 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 const routes = require('./controllers');
 const helpers = require('./utils/helpers');
-const formatMessage = require('./utils/message')
+const formatMessage = require('./utils/message');
+const { userJoin, getCurrentUser, userLeave, getOnlineUsers } = require('./utils/users');
 
 // Import sequelize connection and store
 const sequelize = require('./config/connection');
@@ -58,22 +59,45 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
+
+
 io.on('connection', (socket) => {
-    console.log('user connected');
-    // socket.emit sends message to the user connecting
-    socket.emit('message', formatMessage('Code.X Chat', 'Welcome to Code.X Chat!'));
-    // socket.broadcast.emit sends message to everyone but user
-    socket.broadcast.emit('message', formatMessage('Code.X Chat', 'A user has joined the chat!'));
+    socket.on('joinRoom', ({ username, room }) => {
+        const user = userJoin(socket.id, username, room);
+
+        socket.join(user.room)
+        // socket.emit sends message to the user connecting
+        socket.emit('message', formatMessage('Code.X Chat', 'Welcome to Code.X Chat!'));
+        // socket.broadcast.emit sends message to everyone but user
+        socket.broadcast.to(user.room).emit('message', formatMessage('Code.X Chat', `${user.username} has joined the chat!`));
+        
+        io.to(user.room).emit('onlineUsers', {
+            room: user.room,
+            users: getOnlineUsers(user.room)
+        });
+    });
+
 
     // Runs when a user disconnects
     socket.on('disconnect', () => {
-        // io.emit sends message to everyone
-        io.emit('message', formatMessage('Code.X Chat', 'A user has left the chat!'))
+        const user = userLeave(socket.id);
+
+        if(user) {
+            io.to(user.room).emit('message', formatMessage('Code.X Chat', `${user.username} has left the chat!`))
+        };
+
+        io.to(user.room).emit('onlineUsers', {
+            room: user.room,
+            users: getOnlineUsers(user.room)
+        });
+        
     });
 
     // grats the input from user and emit to io server
     socket.on('chatMsg', (msg) => {
-        io.emit('message', formatMessage('UserName', msg))
+        const user = getCurrentUser(socket.id);
+
+        io.to(user.room).emit('message', formatMessage(user.username, msg))
     });
 });
 

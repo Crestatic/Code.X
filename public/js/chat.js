@@ -1,10 +1,21 @@
 const chatInput = document.getElementById('chatInput');
-const username = document.getElementById('user');
-console.log(username)
+const userList = document.querySelector('.users');
 const socket = io();
 
-let user = $('#user').text();
+
+const username = $('#user').text();
+const room = 'CodexChat';
+
+
 console.log(user)
+
+socket.emit('joinRoom', {username, room});
+
+// Current online users
+socket.on('onlineUsers', ({ room, users }) => {
+    // outputRoomName(room);
+    outputUsers(users);
+})
 
 socket.on('message', message => {
     console.log(message);
@@ -13,7 +24,7 @@ socket.on('message', message => {
         <p class="chatInfo">${message.username} @ <span>${message.time}:</span></p>
         <p class="chatMsg">${message.text}</p></div>`)
     
-    //Need to find a way to include autoscroll function for chatbox.
+    //Need to find a way to include autoscroll function for chatbox
 });
 
 // Chat input
@@ -28,27 +39,8 @@ chatInput.addEventListener('submit', (e) => {
     e.target.elements.msg.focus();
 });
 
-// function outputMessage(message)
 
-// var user = {};
-
-// socket.on('user-connected', (users) => {
-//     $(".chat-box").append('<div class="chat-message"><p>' + users.user + ' has joined chat.</p>')
-// });
-
-// socket.on('user-disc', (users) => {
-//     $(".chat-box").append('<div class="chat-message><p>' + users.user + ' has joined.</p>')
-// });
-
-// socket.on('new-message', (data) => {
-//     $(".chat-box").append('<div class="chat-message><p>' + data.user + ': ' + data.message +'</p>')
-// });
-
-// socket.on('online-users', (users) => {
-//     const values = Object.values(users)
-//     socket.emit('send-users', value);
-// });
-
-// socket.on('display-users', (values) => {
-
-// })
+function outputUsers(users) {
+    userList.innerHTML = `
+     ${users.map(user => `<p>${user.username}</p>`).join()}`;
+}
