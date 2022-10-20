@@ -1,0 +1,41 @@
+
+<div>
+<form class="feedbackForm">
+    <div class="form-group col-3">
+        <label for="exampleFormControlInput1">Email address</label>
+        <input type="email" class="form-control" id="feedbackEmail" placeholder="name@example.com">
+    </div>
+
+    <div class="form-group col-3">
+        <label for="exampleFormControlTextarea1">Input feedback here</label>
+        <textarea class="form-control" id="feedbackInput" rows="5"></textarea>
+    </div>
+
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+</div>
+<br><br>
+
+  {{#if feedbacks.length}}
+  <div class="text-center feedback-list">
+    <h3>Recent Feedback:</h3>
+<br>
+    {{#each feedbacks as |feedback|}}
+    <div class="row mb-2">
+      <div class="">
+        <h4>From: {{feedback.email}}</h4>
+      </div>
+      <div class="">
+        <h2>{{feedback.feedback}}</h2>
+      </div>
+      <div class="">
+        <p>Created on: {{format_date date_created}}</p>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+
+<script src="/js/feedback.js"></script>

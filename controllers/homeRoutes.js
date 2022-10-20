@@ -33,8 +33,6 @@ router.get('/profile', withAuth, async (req, res) => {
   }
 });
 
-  
-
 router.get('/chat', withAuth, async (req, res) => {
   try {
     // Find the logged in user based on the session ID
