@@ -73,25 +73,27 @@ main {
 }
 
 /* Project CSS */
-#language-boxes {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
-}
-.checkboxes {
-    margin: 10px;
-}
-.labels {
-    margin: 10px
-}
-#btn-container {
-    display: flex;
-    justify-content: center;
-    margin: 10px;
+.hide {
+    display: none;
 }
 #projectContainer {
-    margin: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
-h3 {
-    text-align: center;
+label {
+    margin-right: 2rem;
+}
+  
+table {
+    margin-top: 1em;
+    border-collapse: collapse;
+}
+table td {
+    padding: 0.2rem;
+    border: 1px solid lightgray;
+}
+table th {
+    background-color: steelblue;
+    color: white;
 }
