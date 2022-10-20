@@ -1,6 +1,10 @@
 const chatInput = document.getElementById('chatInput');
-
+const username = document.getElementById('user');
+console.log(username)
 const socket = io();
+
+let user = $('#user').text();
+console.log(user)
 
 socket.on('message', message => {
     console.log(message);

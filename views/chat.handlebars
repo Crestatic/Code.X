@@ -1,7 +1,7 @@
     <div class="container">
         <div id="main" class="row">
             <div id="sideBar" class="col-sm-3 border border-dark  text-center">
-                <h1>Code.X Chat</h1>
+                <h4>Username: <span  id="user">{{name}}</span></h4>
                 <hr class="line">
                 <h6>Online Users:</h6>
                 <hr class="line">
@@ -9,7 +9,7 @@
 
                 </ul>
             </div>
-            <div id="mainArea" class="col-sm-8 border border-dark"> <!-- Chat box -->
+            <div id="mainArea" class="col-sm-8 border border-dark">
                 <div class="chat-container">
                     <div class="chat-box">
 
@@ -25,5 +25,6 @@
         </div>
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/chat.js"></script>
