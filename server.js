@@ -19,9 +19,9 @@ const PORT = process.env.PORT || 3002;
 const http = require('http').Server(app);
 const io = require('socket.io')(http, {
     cors: {
-        origin: "http://localhost:3001",
+        origin: "localhost:3002",
         methods: "GET,POST",
-        credentials: "true"
+        credentials: "false"
     }
 });
 
@@ -36,7 +36,7 @@ const sess = {
         maxAge: 300000,
         httpOnly: true,
         secure: false,
-        sameSite: 'none',
+        sameSite: 'lax',
     },
     resave: false,
     saveUninitialized: true,
