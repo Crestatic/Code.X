@@ -34,12 +34,19 @@ $.ajax({
   function showProjects(data) {
     console.log('this is data:', data);
     console.log('this is object',Object)
-    list.innerHTML = data.map(f => `
-  <tbody>
-  <tr><td><h5>${f.id}.</h5></td><td><h5>${f.language_name}</h5></td><td><h5>${f.projects.map(p => p.project_name).join(", ")}</h5></td></tr>
-  
-  `).join("");
+    let projects = data.reduce((a,b) => a.concat(b.projects), [])
+    
+    // sort the array by project id 
+    .sort((a,b) => a.id - b.id)
+    
+    // remove duplicates projects by comparing current and previous id
+    .filter((item, index, array) => !index || item.id !== array[index-1].id);
 
+    // update table
+    list.innerHTML = projects.length > 0 
+      ? projects.map(item => `<tr><td>${item.id}</td><td>${item.project_name}</td></tr>`).join("\n")
+      : `<tr><td colspan="10">No matching projects found</td</tr>`;
+      
   trs = [...list.children];
 }
 
