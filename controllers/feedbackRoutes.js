@@ -2,14 +2,6 @@ const { Feedback } = require('../models');
 const router = require('express').Router();
 const withAuth = require('../utils/auth');
 
-// router.get('/', async (req, res) => {
-//   try {
-//     res.render('feedback');
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
 router.get('/', withAuth, async (req, res) => {
   try {
     const feedbackData  = await Feedback.findAll();
