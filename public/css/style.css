@@ -161,3 +161,9 @@ table th {
 #filt {
     text-align: center;
 }
+
+#feedback {
+    background-color: rgb(138, 189, 186);
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
