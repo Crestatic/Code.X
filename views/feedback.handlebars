@@ -1,41 +1,56 @@
+<div class="container">
+  <div id="main" class="row">
+    <div id="sideBar" class="col-sm-10 border border-dark">
+      <form class="feedbackForm">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">Email address</label>
+            <input type="email" class="form-control" id="feedbackEmail" placeholder="name@example.com">
+        </div>
+
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">Input feedback here</label>
+            <textarea class="form-control" id="feedbackInput" rows="5"></textarea>
+        </div>
+
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 <div>
-<form class="feedbackForm">
-    <div class="form-group col-3">
-        <label for="exampleFormControlInput1">Email address</label>
-        <input type="email" class="form-control" id="feedbackEmail" placeholder="name@example.com">
-    </div>
 
-    <div class="form-group col-3">
-        <label for="exampleFormControlTextarea1">Input feedback here</label>
-        <textarea class="form-control" id="feedbackInput" rows="5"></textarea>
-    </div>
-
-    <div class="col-auto">
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-</form>
 </div>
 <br><br>
 
   {{#if feedbacks.length}}
   <div class="text-center feedback-list">
-    <h3>Recent Feedback:</h3>
+    <h2>Recent Feedback:</h2>
 <br>
-    {{#each feedbacks as |feedback|}}
-    <div class="row mb-2">
-      <div class="">
-        <h4>From: {{feedback.email}}</h4>
+
+<div class="container">
+  <div id="main" class="row">
+    <div id="sideBar" class="col-sm-8 border border-dark">
+      {{#each feedbacks as |feedback|}}
+      <div id="feedback" class="col-sm-12 border border-dark">
+        <div class="">
+          <h4>From: {{feedback.email}}</h4>
+        </div>
+        <div class="">
+          <h2>{{feedback.feedback}}</h2>
+        </div>
+        <div class="">
+          <p>Created on: {{format_date date_created}}</p>
+        </div>
       </div>
-      <div class="">
-        <h2>{{feedback.feedback}}</h2>
-      </div>
-      <div class="">
-        <p>Created on: {{format_date date_created}}</p>
-      </div>
+      {{/each}}
     </div>
-    {{/each}}
-  </div>
   {{/if}}
+    </div>
+  </div>
+</div>
+    
 
 <script src="/js/feedback.js"></script>
